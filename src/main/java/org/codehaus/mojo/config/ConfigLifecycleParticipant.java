@@ -138,17 +138,19 @@ public class ConfigLifecycleParticipant
    * Returns the available configuration templates for given project.
    */
   private Map<String, Xpp3Dom> getProjectConfigurations(final MavenProject mavenProject) {
+    final Map<String, Xpp3Dom> result = new HashMap<>();
     final Plugin configurationMavenPlugin =
         mavenProject.getModel().getBuild() != null
             ? getConfigurationMavenPluginFromContainer(mavenProject.getModel().getBuild())
             : null;
-    Xpp3Dom configuration = (Xpp3Dom) configurationMavenPlugin.getConfiguration();
-    final Map<String, Xpp3Dom> result = new HashMap<>();
-    for (Xpp3Dom child : configuration.getChildren()) {
-      if (TEMPLATE_TAG.equals(child.getName())) {
-        String name = child.getAttribute(NAME_ATTRIBUTE);
-        if (!Strings.isNullOrEmpty(name)) {
-          result.put(name, child);
+    if (configurationMavenPlugin != null) {
+      Xpp3Dom configuration = (Xpp3Dom) configurationMavenPlugin.getConfiguration();
+      for (Xpp3Dom child : configuration.getChildren()) {
+        if (TEMPLATE_TAG.equals(child.getName())) {
+          String name = child.getAttribute(NAME_ATTRIBUTE);
+          if (!Strings.isNullOrEmpty(name)) {
+            result.put(name, child);
+          }
         }
       }
     }
