@@ -30,8 +30,8 @@ Example use:
         </configuration>
       </plugin>
 ```
-* define some configuration templates, in this name there are two: `flower` and `car`.
-* reference the configuration templates at their targets, you might also add overrides and or customizations:
+* define some configuration templates, in this snippet above there are two: `flower` and `car`.
+* reference the configuration templates at their targets, you might also add overrides:
 ```
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -58,7 +58,9 @@ Example use:
           <artifactId>fictive3-maven-plugin</artifactId>
           <version>1.0</version>
           <configuration>
-            <configurationTemplate name="car" />
+            <configurationTemplate name="car">
+              <cc>1200</cc>
+            </configurationTemplate>
           </configuration>
         </plugin>
 ```
@@ -88,7 +90,7 @@ Example use:
           <version>1.0</version>
           <configuration>
             <name>citroen</name>
-            <cc>1600</cc>
+            <cc>1200</cc>
           </configuration>
         </plugin>
 ```
