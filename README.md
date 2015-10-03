@@ -98,8 +98,8 @@ Example use:
 ## Application order
 
 The order how each element is applied is following:
-* the node from `configurationTemplate` is added to plugin `configuration`
-* the node from plugin `configuration/configurationTemplate` is added to `configuration` (effectively pushing "level up")
+* the nodes from config-maven-plugin configuration `configurationTemplate` is added to plugin `configuration`, possibly replacing already existing nodes
+* the nodes from target plugin configuration `configurationTemplate` is added to `configuration` (effectively pushing "level up"), possibly replacing already existing nodes
 
 
 
