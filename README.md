@@ -1,8 +1,7 @@
 # Configuration Maven Plugin
 A simple proof-of-concept plugin that makes possible to reuse plugin configurations.
 
-
-Note: There are some TODOs still in code (addUnique and cleanup)!
+## Usage
 
 Example use:
 * declare plugin as extension in build/plugins section (will fail if not set as extension):
@@ -93,6 +92,14 @@ Example use:
           </configuration>
         </plugin>
 ```
+
+## Application order
+
+The order how each element is applied is following:
+* the node from `configurationTemplate` is added to plugin `configuration`
+* the node from plugin `configuration/configurationTemplate` is added to `configuration` (effectively pushing "level up")
+
+
 
 Have fun!  
 ~t~
