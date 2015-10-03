@@ -117,7 +117,7 @@ public class ConfigLifecycleParticipant
 
             addUnique(projectConfiguration, pluginConfiguration);
             addUnique(templateReference, pluginConfiguration);
-            // TODO: cleanup, remove template configurationTemplate from pluginConfiguration
+            removeChildByName(TEMPLATE_TAG, pluginConfiguration);
           }
         }
       }
@@ -128,9 +128,23 @@ public class ConfigLifecycleParticipant
    * Adds uniquely DOM child.
    */
   private void addUnique(final Xpp3Dom source, final Xpp3Dom target) {
-    // TODO: add source children uniquely, if target has same named children, remove it
     for (Xpp3Dom sourceElement : source.getChildren()) {
+      removeChildByName(sourceElement.getName(), target);
       target.addChild(sourceElement);
+    }
+  }
+
+  /**
+   * Removes child by name.
+   */
+  private void removeChildByName(final String name, final Xpp3Dom dom) {
+    Xpp3Dom[] children = dom.getChildren();
+    for (int i = 0; i < children.length; i++) {
+      Xpp3Dom child = children[i];
+      if (name.equals(child.getName())) {
+        dom.removeChild(i);
+        break;
+      }
     }
   }
 
